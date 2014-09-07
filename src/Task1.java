@@ -25,8 +25,13 @@ public class Task1 {
         Task1 instance = new Task1();
 
         //количество входных агрументов (координат точек на плоскости) должно быть четным
-        if (args.length == 0 || args.length % 2 != 0) {
-            System.err.println("Error: The number of arguments must be even and greater than 0");
+        try {
+            if (args.length == 0 || args.length % 2 != 0) {
+                throw new ArgumentException("Error: The number of arguments " +
+                        "must be even and greater than 0");
+            }
+        } catch (ArgumentException e) {
+            System.err.println(e.getMessage());
             System.exit(1);
         }
 
@@ -66,7 +71,7 @@ public class Task1 {
         // 1. Находим точку с наименьшей x-координатой (самая левая точка из множества),
         //    которая будет гарантированно входить в МВО,
         //    и записываем ее индекс в начало рабочего списка
-        for (int i = 1; i < points.size(); i ++) {
+        for (int i = 1; i < points.size(); i++) {
             if (points.get(indexes.get(i)).x < points.get(indexes.get(0)).x) {
                 //меняем индексы местами
                 indexes.set(i, indexes.set(0, indexes.get(i)));
@@ -105,5 +110,11 @@ public class Task1 {
      */
     private int isLeft(Point a, Point b, Point c) {
         return (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
+    }
+
+    private static class ArgumentException extends RuntimeException {
+        ArgumentException(String message) {
+            super(message);
+        }
     }
 }
