@@ -27,10 +27,10 @@ public class Task1 {
         //количество входных агрументов (координат точек на плоскости) должно быть четным
         try {
             if (args.length == 0 || args.length % 2 != 0) {
-                throw new ArgumentException("Error: The number of arguments " +
+                throw new IllegalArgumentException("Error: The number of arguments " +
                         "must be even and greater than 0");
             }
-        } catch (ArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -110,11 +110,5 @@ public class Task1 {
      */
     private int isLeft(Point a, Point b, Point c) {
         return (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
-    }
-
-    private static class ArgumentException extends RuntimeException {
-        ArgumentException(String message) {
-            super(message);
-        }
     }
 }

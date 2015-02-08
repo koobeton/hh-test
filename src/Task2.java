@@ -22,10 +22,10 @@ public class Task2 {
         //количество входных агрументов должно равняться трем
         try {
             if (args.length != 3) {
-                throw new ArgumentException("Error: Wrong arguments number\n" +
+                throw new IllegalArgumentException("Error: Wrong arguments number\n" +
                         "Must be: (int)dividend (int)divisor (int)radix");
             }
-        } catch (ArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -40,17 +40,17 @@ public class Task2 {
             b = Integer.parseInt(args[1]);
             k = Integer.parseInt(args[2]);
             if (b == 0) {
-                throw new ArgumentException("Error: The second argument (divisor) " +
+                throw new IllegalArgumentException("Error: The second argument (divisor) " +
                         "can not be equal to 0 (division by 0)");
             }
             if (k <= 0) {
-                throw new ArgumentException("Error: The third argument (radix) " +
+                throw new IllegalArgumentException("Error: The third argument (radix) " +
                         "must be greater than 0 (division by 0)");
             }
         } catch (NumberFormatException e) {
             System.err.println("Error: All arguments must be an integer");
             System.exit(1);
-        } catch (ArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -142,11 +142,5 @@ public class Task2 {
 
         //возвращаем результат
         return result.equals("") ? result : "." + result;
-    }
-
-    private static class ArgumentException extends RuntimeException {
-        ArgumentException(String message) {
-            super(message);
-        }
     }
 }
